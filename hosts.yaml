@@ -1,0 +1,13 @@
+---
+all:
+  children:
+    admin:
+      hosts:
+        tsukuba104.intrigger.omni.hpcc.jp:
+    osd:
+      hosts:
+        tsukuba101.intrigger.omni.hpcc.jp:
+        tsukuba102.intrigger.omni.hpcc.jp:
+        tsukuba103.intrigger.omni.hpcc.jp:
+        tsukuba109.intrigger.omni.hpcc.jp:
+        tsukuba110.intrigger.omni.hpcc.jp:
