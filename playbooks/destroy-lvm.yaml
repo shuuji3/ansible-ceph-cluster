@@ -1,0 +1,11 @@
+---
+- hosts: osd
+  tasks:
+    - name: Destroy LVM for /dev/sd{a,b,c,d}
+      # using lvm module may be better approach
+      shell: sudo dd if=/dev/zero of={{ item }} bs=1M count=1
+      with_items:
+        - /dev/sda
+        - /dev/sdb
+        - /dev/sdc
+        - /dev/sdd
