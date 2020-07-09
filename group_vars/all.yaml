@@ -1,0 +1,3 @@
+---
+ceph_cluster_config: /home/shuuji3/src/ceph-cluster-config/
+ceph_release: octopus

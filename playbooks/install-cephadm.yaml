@@ -1,0 +1,25 @@
+---
+- hosts: admin
+  tasks:
+    - name: Download cephadm binary
+      get_url:
+        url: https://github.com/ceph/ceph/raw/octopus/src/cephadm/cephadm
+        dest: '/tmp/cephadm'
+        mode: 0755
+
+    - name: Install Ceph repository
+      shell: sudo /tmp/cephadm add-repo --release {{ ceph_release }}
+
+    # Currently, there is no package for focal so for now try using bionic
+    #
+    # workaround: using lineinfile module is better
+    # but currently become cannot be used on my environment so use sudo
+    - name: Replace eoan flavor with bionic on apt source file
+      shell: sudo sed -i 's/eoan/bionic/' /etc/apt/sources.list.d/ceph.list
+
+    # This is not good but do this to suppress error for bionic repository
+    - name: Disable security check for Ceph repository
+      shell: sudo sed -i 's/^deb http/deb [trusted=yes] http/' /etc/apt/sources.list.d/ceph.list
+
+    - name: Install cephadm
+      shell: sudo apt install cephadm
